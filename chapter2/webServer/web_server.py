@@ -1,3 +1,7 @@
+#
+#  by Nathan Guo
+#  usage: python web_server.py
+#
 from socket import *
 # Welcome socket
 serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -7,9 +11,11 @@ serverSocket.bind(('', 8008))
 serverSocket.listen(1)
 while True:
     print("The server is ready to serve!")
+    # Connection socket
     connectionSocket, addr = serverSocket.accept()
     try:
         message = connectionSocket.recv(4096)
+        # get the filename from url
         filename = message.split()[1]
         filename = filename[1:]
         with open(filename, 'r', encoding='utf-8') as f:
